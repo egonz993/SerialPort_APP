@@ -8,7 +8,8 @@
 </head>
 <body>
     
-    <button onclick="requestDevice()">Click Me!</button>
+    <button onclick="requestDevice()">requestDevice</button>
+    <button onclick="getDevices()">getDevices</button>
 
 
     <script>
@@ -21,6 +22,20 @@
             })
             .catch(error => { console.error(error); });
         }
+
+        function getDevices() {
+            navigator.usb.getDevices()
+            .then(devices => {
+                console.log("Total devices: " + devices.length);
+                devices.forEach(device => {
+                console.log("Product name: " + device.productName + ", serial number " + device.serialNumber);
+                });
+            });
+
+            //CONSOLE OUTPUT
+            //Product name: FT232R USB UART, serial number AB0LIA6A
+        }
+
 
     </script>
 </body>
