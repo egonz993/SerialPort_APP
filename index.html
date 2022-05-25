@@ -8,15 +8,20 @@
 </head>
 <body>
     
+    <button onclick="requestDevice()">Click Me!</button>
 
 
     <script>
-        navigator.usb.requestDevice({ filters: [{ vendorId: 0x2341 }] })
-        .then(device => {
-            console.log(device.productName);      // "Arduino Micro"
-            console.log(device.manufacturerName); // "Arduino LLC"
-        })
-        .catch(error => { console.error(error); });
+
+        function requestDevice() {
+            navigator.usb.requestDevice({ filters: [] })
+            .then(device => {
+                console.log(device.productName);      // "Arduino Micro"
+                console.log(device.manufacturerName); // "Arduino LLC"
+            })
+            .catch(error => { console.error(error); });
+        }
+
     </script>
 </body>
 </html>
