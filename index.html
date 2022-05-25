@@ -5,13 +5,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 </head>
 <body>
     
     <button onclick="deviceConnect()">Connect</button>
     <button onclick="writePort()">sendData</button>
     <button onclick="closePort()">closePort</button>
+    
+    
+    <div class="input-group">
+      <textarea class="form-control" aria-label="With textarea" id="txt_payload"></textarea>
+    </div>
 
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    
     <script>
       let device;
       let port = navigator.serial;
@@ -46,14 +58,21 @@
           const readableStreamClosed = device.readable.pipeTo(textDecoder.writable);
           const reader = textDecoder.readable.getReader();
           
-          while (true) {
-            const { value, done } = await reader.read();
-            if (done) {
-              reader.releaseLock();
-              break;
+          try {
+            while (true) {
+              const { value, done } = await reader.read();
+              if (done) {
+                // |reader| has been canceled.
+                break;
+              }
+              // Do something with |value|...
+              console.log(value);
+              document.getElementById('txt_payload').value += value;
             }
-            
-            console.log(value);
+          } catch (error) {
+            // Handle |error|...
+          } finally {
+            reader.releaseLock();
           }
         }
 
@@ -70,10 +89,13 @@
         }
 
         async function closePort(){
+          await device.readable.releaseLock();
           await device.close();
         }
 
     </script>
+
+    
 </body>
 </html>
 
