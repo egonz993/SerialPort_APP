@@ -9,8 +9,7 @@
 <body>
     
     <button onclick="deviceConnect()">Connect</button>
-    <button onclick="readPort()">readPort</button>
-    <button onclick="writePort()">writePort</button>
+    <button onclick="writePort()">sendData</button>
     <button onclick="closePort()">closePort</button>
 
     <script>
@@ -37,43 +36,37 @@
 
           device.open(portOptions).then(result => {
             console.log("Connected");
+            readPort();
           });
         })
       }
-
-      async function writePort(){
-        //const writer = device.writable.getWriter();
-        const textEncoder = new TextEncoderStream();
-        const writableStreamClosed = textEncoder.readable.pipeTo(device.writable);
-
-        const writer = textEncoder.writable.getWriter();
-
-        let payload = "AT+SEND=1:01";
-        payload += "\r\n";
-        console.log(payload);
-        await writer.write(payload);
-
-        // Allow the serial port to be closed later.
-        writer.releaseLock();
-      }
         
-
-
-
         async function readPort(){
-          const reader = device.readable.getReader();
+          const textDecoder = new TextDecoderStream();
+          const readableStreamClosed = device.readable.pipeTo(textDecoder.writable);
+          const reader = textDecoder.readable.getReader();
           
-          // Listen to data coming from the serial device.
           while (true) {
             const { value, done } = await reader.read();
             if (done) {
-              // Allow the serial port to be closed later.
               reader.releaseLock();
               break;
             }
-            // value is a Uint8Array.
+            
             console.log(value);
           }
+        }
+
+
+        async function writePort(){
+          let payload = "AT+SEND=2:000000000000000000000000000000000000000000000026";
+          payload += "\r\n";
+          console.log(payload);
+         
+          const encoder = new TextEncoder();
+          const writer = device.writable.getWriter();
+          await writer.write(encoder.encode(payload));
+          writer.releaseLock();
         }
 
         async function closePort(){
