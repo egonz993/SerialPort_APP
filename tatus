@@ -1,0 +1,73 @@
+[33mcommit a1fa64f084ca36288752bc0905f5ee60bdb73257[m[33m ([m[1;36mHEAD -> [m[1;32mtest[m[33m, [m[1;32mmaster[m[33m)[m
+Author: E'Gonzalez <ingenieria12@telemetrik.com.co>
+Date:   Wed May 25 14:12:42 2022 -0500
+
+    Estaba trabajando con USB; era con SerialPort
+
+[33mcommit d6b2a12cd559c91daceb3fc5ec5aadb7e1e9ffbd[m
+Author: E'Gonzalez <ingenieria12@telemetrik.com.co>
+Date:   Wed May 25 12:46:27 2022 -0500
+
+    erased non working funtions | oppen port works!
+
+[33mcommit 179175d8966034b3a55a5f17c5da79a1fb50f1c5[m
+Author: E'Gonzalez <ingenieria12@telemetrik.com.co>
+Date:   Wed May 25 12:43:17 2022 -0500
+
+    oppend device
+
+[33mcommit 1b4e66410eb9a8dfb46b692a2999144fc713956b[m
+Author: E'Gonzalez <ingenieria12@telemetrik.com.co>
+Date:   Wed May 25 12:35:51 2022 -0500
+
+    pruebas open device
+
+[33mcommit 0a06f24aeacd62fe18cc4251e09926b359fa1eeb[m
+Merge: 0c3f11f fdab5a2
+Author: E'Gonzalez <ingenieria12@telemetrik.com.co>
+Date:   Wed May 25 11:26:37 2022 -0500
+
+    Merge branch 'test'
+
+[33mcommit fdab5a29d98daf61708c65a81c4eaef74e9c46ee[m
+Author: E'Gonzalez <ingenieria12@telemetrik.com.co>
+Date:   Wed May 25 11:20:09 2022 -0500
+
+    getDevices working
+
+[33mcommit 0c3f11f25c7f1f588dff9fdfb58d6ca24fa7722b[m
+Merge: 51b2a6f a367072
+Author: E'Gonzalez <ingenieria12@telemetrik.com.co>
+Date:   Wed May 25 11:04:20 2022 -0500
+
+    merged test with request devices working
+
+[33mcommit a36707211dba523dffd670fa6deeb117f0c3c6d3[m
+Author: E'Gonzalez <ingenieria12@telemetrik.com.co>
+Date:   Wed May 25 11:02:33 2022 -0500
+
+    request device correct
+
+[33mcommit 51b2a6f95a57ac7c5e26c3b52eb491e9d9bff572[m
+Author: E'Gonzalez <ingenieria12@telemetrik.com.co>
+Date:   Wed May 25 10:40:34 2022 -0500
+
+    a
+
+[33mcommit 7b8eed6acd97c6740efb7865a950a0de2814dd9e[m
+Author: E'Gonzalez <ingenieria12@telemetrik.com.co>
+Date:   Wed May 25 10:39:50 2022 -0500
+
+    a
+
+[33mcommit 8ada30a0a1e336ba5eb840a05a76fd4a3398f1a3[m
+Author: E'Gonzalez <ingenieria12@telemetrik.com.co>
+Date:   Wed May 25 09:49:51 2022 -0500
+
+    html 5 template
+
+[33mcommit eea4cada0d614185729f8c37dd4d3b8c56877e30[m
+Author: E'Gonzalez <ingenieria12@telemetrik.com.co>
+Date:   Wed May 25 09:48:16 2022 -0500
+
+    first commit

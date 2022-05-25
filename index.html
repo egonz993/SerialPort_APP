@@ -8,22 +8,78 @@
 </head>
 <body>
     
-    <button onclick="deviceConnect()">Connect!</button>
+    <button onclick="deviceConnect()">Connect</button>
+    <button onclick="readPort()">readPort</button>
+    <button onclick="writePort()">writePort</button>
+    <button onclick="closePort()">closePort</button>
 
     <script>
+      let device;
       let port = navigator.serial;
+      let portOptions = {
+        baudRate: 9600,
+        dataBits: 8,
+        parity: "none",
+        stopBits: 1
+      }
+      
+      let baudRate = 9600;
+      
+      port.onconnect = event => { console.log(event) };
+      port.ondisconnect = event => { console.log(event) };
+
       async function deviceConnect(){
         await port.requestPort();
-        
         await port.getPorts().then(devices => {
           console.log(devices);
+          
+          device = devices[0];
 
-          devices[0].open({baudRate: 9600}).then(result => {
+          device.open(portOptions).then(result => {
             console.log("Connected");
           });
         })
       }
+
+      async function writePort(){
+        //const writer = device.writable.getWriter();
+        const textEncoder = new TextEncoderStream();
+        const writableStreamClosed = textEncoder.readable.pipeTo(device.writable);
+
+        const writer = textEncoder.writable.getWriter();
+
+        let payload = "AT+SEND=1:01";
+        payload += "\r\n";
+        console.log(payload);
+        await writer.write(payload);
+
+        // Allow the serial port to be closed later.
+        writer.releaseLock();
+      }
         
+
+
+
+        async function readPort(){
+          const reader = device.readable.getReader();
+          
+          // Listen to data coming from the serial device.
+          while (true) {
+            const { value, done } = await reader.read();
+            if (done) {
+              // Allow the serial port to be closed later.
+              reader.releaseLock();
+              break;
+            }
+            // value is a Uint8Array.
+            console.log(value);
+          }
+        }
+
+        async function closePort(){
+          await device.close();
+        }
+
     </script>
 </body>
 </html>
