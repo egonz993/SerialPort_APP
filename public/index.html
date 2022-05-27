@@ -24,14 +24,18 @@
                 <div class="text-center">
                     <h1 class="mx-auto my-0 text-uppercase">Serial Port Controller</h1>
                     <img src="img/telemetrik_logo.png" alt="Telemetrik">
-                    <h2 class="text-white-50 mx-auto mt-2 mb-5">A Custom Tool to Manage Serial Devices Connect a Device
-                        to Continue</h2>
-                    <a id="btn_connect" class="btn btn-lg btn-outline-dark m-2" onclick="deviceConnect()">Connect</a>
+                    <h2 class="text-white-50 mx-auto mt-2 mb-5">A Custom Tool to Manage Serial Devices</h2>
+
+                    <div class="card card-baud p-3">
+                        <h3>Select Baud Rate</h3>
+                        <a id="btn_connect" class="btn btn-lg btn-outline-dark m-2" onclick="deviceConnect(9600)">9600</a>
+                        <a id="btn_connect" class="btn btn-lg btn-outline-dark m-2" onclick="deviceConnect(115200)">115200</a>
+                    </div>
+                    
                 </div>
             </div>
         </div>
     </header>
-
 
 
     <div id="card_control" class="container pt-5 d-none" style="height: 100%;">
@@ -41,16 +45,14 @@
                     aria-label="Recipient's username" aria-describedby="basic-addon2" autocomplete="off">
                 <div class="input-group-append">
                     <button class="btn btn-outline-dark" onclick="writePort()" type="button">Send</button>
+                    <button class="btn btn-outline-dark" onclick="location.reload(true)" type="button">Close</button>
                 </div>
             </div>
 
             <textarea class="form-control" rows="25" aria-label="With textarea" id="txt_payload" style="font-size: 10px" disabled></textarea>
             <img src="img/telemetrik_logo.png" alt="Telemetrik">
-
         </form>
     </div>
-
-
 
 
     <!-- Bootstrap -->

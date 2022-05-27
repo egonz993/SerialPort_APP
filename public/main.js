@@ -4,7 +4,7 @@ $('form').submit(false);
 let device;
 let port = navigator.serial;
 let portOptions = {
-    baudRate: 9600,
+    baudRate: 115200,
     dataBits: 8,
     parity: "none",
     stopBits: 1
@@ -19,27 +19,23 @@ port.ondisconnect = event => {
     console.log(event)
 };
 
-async function deviceConnect() {
-    if(navigator.platform == "Win32"){
-        await port.requestPort();
-        await port.getPorts().then(devices => {
-            console.log(devices);
-    
-            device = devices[0];
-    
-            device.open(portOptions).then(result => {
-                console.log("Connected");
-                readPort();
-                $('#btn_connect').prop('disabled', true);
-                $('#masthead').addClass('d-none');
-                $('#card_control').removeClass('d-none');
-            });
-        })
-    }else{
-        alert(navigator.platform  + ": This function is not supported by your device")
-    }
+async function deviceConnect(baudRate) {
+    portOptions.baudRate = baudRate;
 
+    await port.requestPort();
 
+    await port.getPorts().then(devices => {
+        console.log(devices);
+
+        device = devices[0];
+        device.open(portOptions).then(result => {
+            console.log("Connected");
+            readPort();
+            $('#btn_connect').prop('disabled', true);
+            $('#masthead').addClass('d-none');
+            $('#card_control').removeClass('d-none');
+        });
+    })
 }
 
 async function readPort() {
@@ -99,3 +95,4 @@ async function closePort() {
 function getMsg() {
     alert(document.getElementById('txt_payload').value)
 }
+
