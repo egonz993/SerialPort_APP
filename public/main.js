@@ -20,20 +20,26 @@ port.ondisconnect = event => {
 };
 
 async function deviceConnect() {
-    await port.requestPort();
-    await port.getPorts().then(devices => {
-        console.log(devices);
+    if(navigator.platform == "Win32"){
+        await port.requestPort();
+        await port.getPorts().then(devices => {
+            console.log(devices);
+    
+            device = devices[0];
+    
+            device.open(portOptions).then(result => {
+                console.log("Connected");
+                readPort();
+                $('#btn_connect').prop('disabled', true);
+                $('#masthead').addClass('d-none');
+                $('#card_control').removeClass('d-none');
+            });
+        })
+    }else{
+        alert(navigator.platform  + ": This function is not supported by your device")
+    }
 
-        device = devices[0];
 
-        device.open(portOptions).then(result => {
-            console.log("Connected");
-            readPort();
-            $('#btn_connect').prop('disabled', true);
-            $('#masthead').addClass('d-none');
-            $('#card_control').removeClass('d-none');
-        });
-    })
 }
 
 async function readPort() {
