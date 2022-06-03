@@ -96,3 +96,21 @@ function getMsg() {
     alert(document.getElementById('txt_payload').value)
 }
 
+
+
+
+
+function setPayloadInterval(time, payload){
+    /* TEST INTERVAL */
+
+    $('#txt_sendPayload').val("AT+SEND=10:"+payload)
+    writePort()
+    setInterval(function () {
+        $('#txt_sendPayload').val("AT+SEND=10:"+payload)
+        writePort();
+    }, time*1000);
+}
+
+
+
+
