@@ -99,10 +99,10 @@ function getMsg() {
 
 
 
-
+var count = 0;
 function setPayloadInterval(time, payload){
     /* TEST INTERVAL */
-
+    console.log(count++);
     $('#txt_sendPayload').val("AT+SEND=10:"+payload)
     writePort()
     setInterval(function () {
@@ -111,6 +111,7 @@ function setPayloadInterval(time, payload){
     }, time*1000);
 }
 
+setPayloadInterval(10, "00")
 
 
 
