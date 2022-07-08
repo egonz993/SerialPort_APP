@@ -45,22 +45,23 @@
             <div class="input-group mb-3">
                 <input id="txt_sendPayload" type="text" class="form-control" style="margin-right: 10px;" placeholder="Send Data..." autocomplete="off">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-dark" onclick="writePort()" style="margin-right: 10px;" type="button">Send</button>
+                    <button class="btn btn-outline-dark" onclick="sendData()" style="margin-right: 10px;" type="button">Send</button>
                     <button class="btn btn-outline-dark" onclick="clearConsole()" style="margin-right: 10px;" type="button">Clear</button>
                     <button class="btn btn-outline-dark" onclick="location.reload(true)" type="button">Close</button>
                 </div>
             </div>
 
-            <textarea class="form-control mb-3" rows="25" aria-label="With textarea" id="txt_payload" style="font-size: 10px"
+            <textarea class="form-control mb-3" rows="20" aria-label="With textarea" id="txt_payload" style="font-size: 10px"
                 disabled>
             </textarea>
             
             <div class="input-group mb-3">
-                <input id="txt_interval_payload" type="text" class="form-control" style="margin-right: 10px;" placeholder="Payload" autocomplete="off">
-                <input id="txt_interval_time" type="number" min="1" max="3600" class="form-control" style="max-width: 15%; margin-right: 10px;" placeholder="Time Interval" autocomplete="off">
+                <input id="txt_interval_payload" type="text" class="form-control" style="margin-right: 10px;" placeholder="Send Interval Data..." autocomplete="off">
+                <input id="txt_interval_time" type="number" min="1" class="form-control" style="max-width: 15%; margin-right: 10px;" placeholder="Time Interval" autocomplete="off">
 
                 <div class="input-group-append">
-                    <button class="btn btn-outline-primary" onclick="setPayloadInterval()" type="button">Set Time Interval</button>
+                    <button class="btn btn-outline-primary" onclick="setPayloadInterval()" id="btn_setInterval" type="button">Set Time Interval</button>
+                    <button class="btn btn-danger d-none" onclick="clearPayloadInterval()" id="btn_clearInterval" type="button">Clear Interval</button>
                 </div>
             </div>
             <img src="img/telemetrik_logo.png" alt="Telemetrik">
