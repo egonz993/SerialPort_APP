@@ -67,11 +67,11 @@ async function readPort() {
 
 async function writePort() {
     //let payload = "AT+SEND=2:000000000000000000000000000000000000000000000026";
-    let payload = $('#txt_sendPayload').val().toUpperCase() ;
+    let payload = $('#txt_sendPayload').val().toUpperCase();
     payload += "\r\n";
     console.log(payload);
 
-    
+
     $('#txt_payload').val($('#txt_payload').val() + ">> " + payload);
     $('#txt_payload').scrollTop($('#txt_payload')[0].scrollHeight);
 
@@ -81,37 +81,54 @@ async function writePort() {
     writer.releaseLock();
 }
 
-document.querySelector('#txt_sendPayload').addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') {
-        writePort();
-    }
-});
 async function closePort() {
     await device.readable.releaseLock();
     await device.close();
 }
 
+document.querySelector('#txt_sendPayload').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        writePort();
+    }
+});
 
 function getMsg() {
     alert(document.getElementById('txt_payload').value)
 }
 
+function clearConsole(){
+    $('#txt_payload').val("");
+}
 
+
+overrideView();
 
 
 var count = 0;
-function setPayloadInterval(time, payload){
-    /* TEST INTERVAL */
-    $('#txt_sendPayload').val("AT+SEND=10:"+payload)
+
+function setPayloadInterval() {
+    let payload = $('#txt_interval_payload').val()
+    let time = $('#txt_interval_time').val()
+
+    $('#txt_payload').val($('#txt_payload').val() + "\n****************************************")
+    $('#txt_payload').val($('#txt_payload').val() + "\nSTARTED SEND-INTERVAL\n\n- Time: " + time + " seconds" + "\n- Payload: " + payload)
+    $('#txt_payload').val($('#txt_payload').val() + "\n****************************************")
+    $('#txt_payload').val($('#txt_payload').val() + "\n\n")
+    $('#txt_sendPayload').val("AT+SEND=10:" + payload)
     writePort()
+    console.log(count++);
+
     setInterval(function () {
         console.log(count++);
-        $('#txt_sendPayload').val("AT+SEND=10:"+payload)
+        $('#txt_sendPayload').val("AT+SEND=10:" + payload)
         writePort();
-    }, time*1000);
+    }, time * 1000);
+}
+
+function overrideView(){
+    $('#btn_connect').prop('disabled', true);
+    $('#masthead').addClass('d-none');
+    $('#card_control').removeClass('d-none');
 }
 
 //setPayloadInterval(10, "00")
-
-
-
